@@ -2,12 +2,12 @@
 >>> import scrapy
 
 from scrapy.spiders import Spider 
-2 from scrapy.selector import Selector 
-3 from scrapy import Request 
-4 from schoogle_spider.items import O_Item 
-5 from sys import getsizeof 
-6 from datetime import datetime 
-7 import time 
+from scrapy.selector import Selector 
+from scrapy import Request 
+from schoogle_spider.items import O_Item 
+from sys import getsizeof 
+from datetime import datetime 
+import time 
 
 
 from shoogle_spider.items import item
