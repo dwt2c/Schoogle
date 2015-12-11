@@ -1,0 +1,100 @@
+>>> import psycopg2
+>>> import scrapy
+
+from shoogle_spider.items import item
+
+class Shoogle_pipeline(scrapy,item,shoogle_scrapy.Spider):
+
+
+/* Connect to an existing database
+*/
+>>> conn = psycopg2.connect( "host='localhost' dbname='Shoogle' user='groupb' password='fwIgG3v6'")
+
+/* Open a cursor to perform database operations
+*/
+>>> cur = conn.cursor()
+
+
+
+/* Execute a command: this creates a new table
+*/
+>>> cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
+
+
+
+>>> cur.execute(
+     INSERT INTO SEARCHABLE (a_string, an_int, a_bool, a_string)
+         VALUES (URL, PageRank, Security, Keywords);,
+
+>>> cur.execute(
+     INSERT INTO ANALYTICS (a_date, an_int, a_string, an_int, an_int, an_int)
+         VALUES (Last_crawled, PageSize, URL,Times_visited, Seached, Image_count);,	 
+		 
+>>> cur.execute(
+     INSERT INTO SEARCHES (a_string, an_int, a_string, a_string, a_date)
+         VALUES (Chose3n_results, UID, Searched_terms, Cut_down_terms, Time_stamp);,
+		 >>> cur.execute(
+		 
+>>> cur.execute(
+     INSERT INTO CLIENT (,an_int, a_media, a_string)
+         VALUES (UID, Picture, IP);,
+
+>>> cur.execute(
+     INSERT INTO USER2 (a_string, a_string)
+         VALUES (Username, Pword);,
+
+>>> cur.execute(
+     INSERT INTO USER1 (an_int, a_string)
+         VALUES (UID, Username);,
+
+>>> cur.execute(
+     INSERT INTO CRAWL_LOG (a_date, an_int)
+         VALUES (Last_crawled, CID);,
+
+>>> cur.execute(
+     INSERT INTO CRAWL_LIB (a_string, an_int)
+         VALUES (Source, CID);,
+
+>>> cur.execute(
+     INSERT INTO CRAWLERS (an_int, an_int)
+         VALUES (Pages_crawled, CID);,
+
+>>> cur.execute(
+     INSERT INTO ENGINES (a_date, a_string)
+         VALUES (time_stamp, engine);,
+
+>>> cur.execute(
+     INSERT INTO DOMAIN (a_string, a_string)
+         VALUES (tag, body);,
+
+>>> cur.execute(
+     INSERT INTO Full_Page (a_string, a_string)
+         VALUES (URL, HTML);,
+
+>>> cur.execute(
+     INSERT INTO CREATE_LOG_LOOKUP (an_int, a_string)
+         VALUES (UID, URL);,
+
+>>> cur.execute(
+     INSERT INTO IN_TABLE (a_string, a_string, a_string)
+         VALUES (Tag, Body, URL);,
+		 
+>>> cur.execute(
+     INSERT INTO BREAK_DOWN (a_string)
+         VALUES (URL);,
+		 
+>>> cur.execute(
+     INSERT INTO CONSUME (a_string, an_int)
+         VALUES (URL, CID);,
+
+
+
+	 
+# Make the changes to the database persistent
+>>> conn.commit()
+
+# Close communication with the database
+>>> cur.close()
+>>> conn.close()
+	 
+	 return item
