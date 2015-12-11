@@ -35,6 +35,18 @@ class Shoogle_pipeline(object):
 	    self.cursor.execute("""INSERT INTO ANALYTICS (Last_crawled, PageSize, URL, Times_visited, Searched, Image_count) VALUES(%s, %s, %s, %s, %s, %s)""", (item.get('Last_crawled'), item.get('PageSize'), item.get('Times_visited'), item.get('Searched'), item.get('Image_count') )))
 	  elif type(item) is CRAWL_LOGItem:
         self.cursor.execute("""INSERT INTO CRAWL_LOG (Username, Pword) VALUES(%s, %s)""", (item.get('Username'), item.get('Pword') ))
+	  elif type(item) is CRAWL_LIBItem:
+        self.cursor.execute("""INSERT INTO CRAWL_LIB (Source, CID) VALUES(%s, %s)""", (item.get('Source'), item.get('CID')))
+	  elif type(item) is CRAWLERSItem:
+        self.cursor.execute("""INSERT INTO CRAWLERS (Pages_crawled, CID) VALUES(%s, %s)""", (item.get('Pages_crawled'), item.get('CID')))
+	  elif type(item) is ENGINEItem:
+        self.cursor.execute("""INSERT INTO ENGINE (Time_stamp, engine) VALUES(%s, %s)""", (item.get('Time_stamp'), item.get('Engine')))
+	  elif type(item) is DOMAINItem:
+        self.cursor.execute("""INSERT INTO DOMAIN (tag, body) VALUES(%s, %s)""", (item.get('Tag'), item.get('Body')))
+	  elif type(item) is Full_PageItem:
+        self.cursor.execute("""INSERT INTO Full_Page (URL, HTML) VALUES(%s, %s)""", (item.get('URL') item.get('HTML')))
+	  elif type(item) is CREATE_LOG_LOOKUPItem:
+        self.cursor.execute("""INSERT INTO CREATE_ITEM_LOOKUP (UID, URL) VALUES(%s, %s)""", (item.get('UID'), item.get('URL')))
 	  elif type(item) is IN_TABLEItem:
         self.cursor.execute("""INSERT INTO IN_TABLE (Tag, Body, URL) VALUES(%s, %s, %s)""", (item.get('Tag'), item.get('Body'), item.get('URL')))
 	  elif type(item) is BREAK_DOWNItem:
