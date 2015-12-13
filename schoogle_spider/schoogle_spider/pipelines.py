@@ -19,7 +19,7 @@ class Shoogle_pipeline(object):
       elif type(item) is CLIENTItem:
         self.cursor.execute("""INSERT INTO CLIENT (UID, Picture, IP) VALUES(%s, %s, %s)""", (item.get('UID'), item.get('Picture'), item.get('IP'), ))
 	  elif type(item) is SEARCHABLEItem:
-	    self.cursor.execute("""INSERT INTO SEARCHABLE (URL, PageRank, Security, Keywords) VALUES(%s, %s, %s, %s)""", (item.get('URL'), item.get('PageRank'), item.get('Security'), item.get('Keywords'), )))
+	    self.cursor.execute("""INSERT INTO SEARCHABLE (URL, PageRank, secure, Keywords) VALUES(%s, %s, %s, %s)""", (item.get('URL'), item.get('PageRank'), item.get('secure'), item.get('Keywords'), )))
   	  elif type(item) is ANALYTICSItem:
 	    self.cursor.execute("""INSERT INTO ANALYTICS (Last_crawled, PageSize, URL, Times_visited, Searched, Image_count) VALUES(%s, %s, %s, %s, %s, %s)""", (item.get('Last_crawled'), item.get('PageSize'), item.get('Times_visited'), item.get('Searched'), item.get('Image_count'), )))
 	  elif type(item) is CRAWL_LOGItem:
