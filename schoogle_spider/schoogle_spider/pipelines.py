@@ -33,7 +33,7 @@ class Shoogle_pipeline(object):
 	  elif type(item) is DOMAINItem:
         self.cursor.execute("""INSERT INTO DOMAIN (tag, body) VALUES(%s, %s)""", (item.get('Tag'), item.get('Body'), ))
 	  elif type(item) is Full_PageItem:
-        self.cursor.execute("""INSERT INTO Full_Page (URL, HTML) VALUES(%s, %s)""", (item.get('URL') item.get('HTML'), ))
+        self.cursor.execute("""INSERT INTO Full_Page (URL, full_html) VALUES(%s, %s)""", (item.get('URL') item.get('full_html'), ))
 	  elif type(item) is CREATE_LOG_LOOKUPItem:
         self.cursor.execute("""INSERT INTO CREATE_ITEM_LOOKUP (UID, URL) VALUES(%s, %s)""", (item.get('UID'), item.get('URL'), ))
 	  elif type(item) is IN_TABLEItem:
