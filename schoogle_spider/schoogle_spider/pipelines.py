@@ -4,7 +4,7 @@ from shoogle_spider.items import item
 
 class Shoogle_pipeline(object):
   def __init__(self):
-    self.connection = psycopg2.connect( "host='localhost', database='Shoogle', user='groupb', password='fwIgG3v6'")
+    self.connection = psycopg2.connect( "host='postsql', database='Shoogle', user='groupb', password='fwIgG3v6'")
     self.cursor = self.connection.cursor()
  
   def process_item(self, item, spider):
