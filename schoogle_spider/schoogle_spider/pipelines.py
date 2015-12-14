@@ -10,18 +10,15 @@ class Shoogle_pipeline(object):
   def process_item(self, item, spider):
     # check item type to decide which table to insert
     try:
-      if type(item) is USER1Item:
-        self.cursor.execute("""INSERT INTO USER1 (UID, Username) VALUES(%s, %s)""", (item.get('UID'), item.get('Username'),))
-       type(item) is USER2Item:
-        self.cursor.execute("""INSERT INTO USER2 (Username, Pword) VALUES(%s, %s)""", (item.get('Username'), item.get('Pword'), ))
+       
 	   type(item) is SEARCHESItem:
-	    self.cursor.execute("""INSERT INTO SEARCHES (Choseen_results, UID, Searched_terms, Cut_down_terms, Time_stamp) VALUES(%s, %s, %s, %s, %s)""", (item.get('Chosen_results'), item.get('UID'), item.get('Searched_terms'), item.get('Cut_down_terms'), item.get('Time_Stamp'), )))
-       type(item) is CLIENTItem:
+	self.cursor.execute("""INSERT INTO SEARCHES (Choseen_results, UID, Searched_terms, Cut_down_terms, Time_stamp) VALUES(%s, %s, %s, %s, %s)""", (item.get('Chosen_results'), item.get('UID'), item.get('Searched_terms'), item.get('Cut_down_terms'), item.get('Time_Stamp'), )))
+           type(item) is CLIENTItem:
         self.cursor.execute("""INSERT INTO CLIENT (UID, Picture, IP) VALUES(%s, %s, %s)""", (item.get('UID'), item.get('Picture'), item.get('IP'), ))
 	   type(item) is SEARCHABLEItem:
-	    self.cursor.execute("""INSERT INTO SEARCHABLE (full_url, PageRank, secure, Keywords) VALUES(%s, %s, %s, %s)""", (item.get('full_url'), item.get('PageRank'), item.get('secure'), item.get('Keywords'), )))
+	self.cursor.execute("""INSERT INTO SEARCHABLE (full_url, PageRank, secure, Keywords) VALUES(%s, %s, %s, %s)""", (item.get('full_url'), item.get('PageRank'), item.get('secure'), item.get('Keywords'), )))
   	   type(item) is ANALYTICSItem:
-	    self.cursor.execute("""INSERT INTO ANALYTICS (Last_crawled, PageSize, full_url, Times_visited, Searched, Image_count) VALUES(%s, %s, %s, %s, %s, %s)""", (item.get('Last_crawled'), item.get('PageSize'), item.get('url'), item.get('Times_visited'), item.get('Searched'), item.get('Image_count'), )))
+	self.cursor.execute("""INSERT INTO ANALYTICS (Last_crawled, PageSize, full_url, Times_visited, Searched, Image_count) VALUES(%s, %s, %s, %s, %s, %s)""", (item.get('Last_crawled'), item.get('PageSize'), item.get('url'), item.get('Times_visited'), item.get('Searched'), item.get('Image_count'), )))
 	   type(item) is CRAWL_LOGItem:
         self.cursor.execute("""INSERT INTO CRAWL_LOG (Username, Pword) VALUES(%s, %s)""", (item.get('Username'), item.get('Pword'), ))
 	   type(item) is CRAWL_LIBItem:
@@ -43,7 +40,7 @@ class Shoogle_pipeline(object):
 	   type(item) is CONSUMEItem:
         self.cursor.execute("""INSERT INTO CONSUME (full_url, CID) VALUES(%s, %s)""", (item.get('full_url'), item.get('CID'), ))
 	  self.connection.commit()
-      self.cursor.fetchall()
+        self.cursor.fetchall()
  
     except psycopg2.DatabaseError, e:
       print "Error: %s" % e
