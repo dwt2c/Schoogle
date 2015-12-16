@@ -17,6 +17,9 @@ class O_Item(scrapy.Item):
 	full_html = scrapy.Field()	#string
 	full_text = scrapy.Field()	#string
 	secure = scrapy.Field()	#bool
+	cid = scrapy.Field()
+	domain = scrapy.Field()
+	tab = scrapy.Field()
 
     
   

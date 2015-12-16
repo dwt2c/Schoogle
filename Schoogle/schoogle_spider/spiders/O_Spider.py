@@ -1,7 +1,7 @@
 from scrapy.spiders import Spider
 from scrapy.selector import Selector
 from scrapy import Request
-from schoogle_spider.items import O_Item
+from schoogle.items import O_Item
 from sys import getsizeof
 from datetime import datetime
 import time
@@ -33,13 +33,12 @@ class O_Spider(Spider):
 			for link in response.xpath('//@href').extract():
 				try:
 					req = Request(link,callback = self.parse)
-					current_item['links'].append(link) 
 				except ValueError:
 					pass # might want to log these eventually
 		except AttributeError:
 			pass # log these eventually
-		current_item = O_Item()
 		# fill up item with statistics
+		current_item = O_Item()
 		current_item['url'] = response.url
 		current_item['title'] = response.xpath('//title').extract()
 		current_item['timestamp'] = datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
@@ -47,10 +46,20 @@ class O_Spider(Spider):
 		current_item['full_html'] = response.body
 		current_item['full_text'] = prune(response.body)
 		current_item['secure'] = 'https' in str(response.request)
+		current_item['links'] = response.xpath('//@href').extract()
 		yield current_item
 
 
 		# recursive page search is below, this must happen after the item is pipelined to postgresql
 		# this is where we yield a requests object with parse as the callback and the real recursion kicks ins
-		yield req
+		try:
+			for link in response.xpath('//@href').extract():
+				try:
+					req = Request(link,callback = self.parse)
+					yield req
+				except ValueError:
+					pass # might want to log these eventually
+		except AttributeError:
+			pass # log these eventually
+
 	
