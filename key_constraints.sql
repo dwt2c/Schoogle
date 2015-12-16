@@ -62,7 +62,7 @@ alter table IN1
 		on update cascade;
 		
 alter table IN1
-	add foregin key (Tag, Body1) references Domain(Tag,Body1)
+	add foreign key (Tag, Body1) references Domain(Tag,Body1)
 		on delete cascade
 		on update cascade;
 --CONSUME
