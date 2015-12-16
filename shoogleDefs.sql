@@ -10,7 +10,7 @@
 create table USERS1(
 	UID1 integer
 		primary key,
-	Username character varying(20)
+	username character varying(20)
 		not null unique
 	);
 
@@ -18,9 +18,9 @@ create table USERS1(
 -- attrs (Username, Pword)
 -- key: username	
 create table USERS2(
-	Username character varying(20) 
+	username character varying(20) 
 		primary key,
-	Pword character varying(30)
+	pword character varying(30)
 		not null
 	);
 
@@ -37,37 +37,37 @@ create table CLIENT(
 -- attrs (URL, PageRank, Security, Keywords)
 -- key: URL	
 create table SEARCHABLE(
-	PageRank integer 
+	pagerank integer 
 		not null,
 	URL text
 		primary key,
-	Security boolean 
+	security boolean 
 		not null,
-	Keywords text
+	key_text text
 		not null		
 	);
 
 -- attrs (Last_crawled, Page_size, URL, Times_visited, Searched, Derived, Image_count)
 -- key: URL	
 create table ANALYTICS(
-	Last_crawled date
+	last_crawled date
 		not null,
-	Page_size integer
+	page_size integer
 		not null,
 	URL text
 		primary key,
-	Times_visited integer
+	times_visited integer
 		not null,
-	Searched integer
+	searched integer
 		not null,
-	Image_count integer
+	image_count integer
 		not null
 	);
 
 -- attrs (Last_crawled, CID)
 -- key: Last_crawled	
 create table CRAWL_LOG(
-	Last_crawled date
+	last_crawled date
 		primary key,
 	CID integer
 		not null
@@ -76,7 +76,7 @@ create table CRAWL_LOG(
 -- attrs (Pages_crawled, CID)
 -- key: CID	
 create table CRAWLERS(
-	Pages_crawled integer
+	pages_crawled integer
 		not null,
 	CID integer
 		primary key
@@ -85,15 +85,15 @@ create table CRAWLERS(
 -- attrs(Chosen_results, UID, Searched_terms, Cut_down_terms, Time_stamp)
 -- keys: UID, Time_stamp	
 create table SEARCHES(
-	Chosen_results text
+	chosen_results text
 		not null,
 	UID1 integer
 		not null,
-	Searched_terms text
+	searched_terms text
 		not null,
-	Cut_down_terms text
+	cut_down_terms text
 		not null,
-	Time_stamp date
+	time_stamp date
 		not null,
 		primary key(UID1, Time_stamp)	
 	);
@@ -110,9 +110,9 @@ create table ENGINES(
 -- attrs(Tag, Body)
 -- keys: Tag, Body
 create table DOMAIN(
-	Tag text
+	tag text
 		not null,
-	Body1 text
+	body1 text
 		not null,
 	primary key(Tag, Body1)
 	);
@@ -140,9 +140,9 @@ create table CREATE_LOG_LOOKUP(
 -- attrs (Tag, Body, URL)
 -- keys: Tag, Body, URL	
 create table IN1(
-	Tag text
+	tag text
 		not null,
-	Body1 text
+	body1 text
 		not null,
 	URL text
 		not null,
