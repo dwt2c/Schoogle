@@ -1,9 +1,10 @@
 import psycopg2
 
 
-def upsert(connection,table,primary_key_column,primekey,to_insert_column,to_insert):
-	insertdict = {'connection' : connection,'table' : table, 'primary_key_column' : primary_key_column, 'primekey' : primekey,
-	'to_insert_column' : to_insert_column,'to_insert' : to_insert }
+def upsert(connection,table,primary_key_column,primarykey,to_insert_column,to_insert):
+	insertdict = dict{'connection'=connection,'table'=table, 'primary_key_column'=primary_key_column,'primarykey'=primarykey,
+	'to_insert_column'=to_insert_column,'to_insert'=to_insert}
+	for i 
 	try:
 		a = connection.execute(
 			"""UPDATE %(table)  SET %(to_insert_column) = %(to_insert)  WHERE  %(primarykey) = %(primary_key_column)""" ,  insertdict)

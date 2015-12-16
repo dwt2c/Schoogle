@@ -15,6 +15,8 @@ class Shoogle_pipeline(object):
       UID = None 
 	  Username = None
 	  Pword = None
+
+	  
 	  
 	    try:
 		self.cursor.execute(""" UPDATE table SEARCHES Choseen_results = %s, UID, Searched_terms, Cut_down_terms, Time_stamp))""", (item.get('Chosen_results'), UID, item.get('Searched_terms'), item.get('Cut_down_terms'), item.get('Time_Stamp'), )))
