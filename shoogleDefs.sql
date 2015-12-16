@@ -43,8 +43,10 @@ create table SEARCHABLE(
 		primary key,
 	security boolean 
 		not null,
-	key_text text
-		not null		
+	title text
+		not null,
+	full_text text	
+		not null
 	);
 
 -- attrs (Last_crawled, Page_size, URL, Times_visited, Searched, Derived, Image_count)
@@ -149,12 +151,4 @@ create table IN1(
 		primary key(Tag, Body1, URL)
 	);
 
--- attrs (URL, CID)
--- keys: URL, CID
-create table CONSUME(
-	URL text
-		not null,
-	CID int 
-		not null,
-		primary key(URL, CID)
-	);
+

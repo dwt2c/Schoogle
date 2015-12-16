@@ -3,7 +3,7 @@
 
 drop table USERS1 cascade;
 drop table USERS2 cascade;
-drop table CLIETN cascade;
+drop table CLIENT cascade;
 drop table SEARCHABLE cascade;
 drop table ANALYTICS cascade;
 drop table CRAWL_LOG cascade;

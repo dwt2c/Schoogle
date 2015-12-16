@@ -4,6 +4,11 @@
 -- create a new column in the table to hold tsv values used for 
 -- the full text search found in Postgresql
 
+ALTER TABLE SEARCHABLE add column title text;
+
+Alter TABLE SEARCHABLE add column full_text text;
+
+
 ALTER TABLE SEARCHABLE add COLUMN text_vals tsvector;
 
 -- Make an index on this column using gin as opposed to gist
@@ -18,33 +23,28 @@ CREATE INDEX text_idx ON SEARCHABLE USING gin(text_vals);
 
 -- fill the column with tsvectors and give title precedence over text in ranking
 
-UPDATE SEARCHABLE SET text_vals = setweight(to_tsvector(coalesce(title, ' '), 'A') ||
-		setweight(to_tsvector(coalesce(text,' '), 'C');
+UPDATE SEARCHABLE SET text_vals = setweight(to_tsvector(coalesce(title, ' ')), 'A') ||
+		setweight(to_tsvector(coalesce(full_text,' ')), 'C');
 
 -- function to update text_vals column so contents are always up to date
 
 CREATE FUNCTION update_trigger() RETURNS trigger AS $$
 	begin
-		new.text_vals := setweight(to_tsvector(coalesce(new.title, ' '), 'A') ||
-						 setweight(to_tsvector(coalesce(new.text,' '), 'C');
+		new.text_vals := setweight(to_tsvector(coalesce(new.title, ' ')), 'A') ||
+						 setweight(to_tsvector(coalesce(new.full_text,' ')), 'C');
 						 return new;
 					end
-				$$ LANGUAGE plgsql;
+				$$ LANGUAGE plpgsql;
 				
 -- create trigger to do function whenever there is insert or update
 
-CREATE TRIGGER tsvector refresh BEFORE INSERT OR UPDATE ON SEARCHABLE
+CREATE TRIGGER tsvector_refresh BEFORE INSERT OR UPDATE ON SEARCHABLE
 	FOR EACH ROW EXECUTE PROCEDURE update_trigger();
 				
 				
-				
+			
 ----------------------------------------------------------------------------
 --Query the searchable table
 
-select URL, title as title from (
-	select URL, title, text_vals
-	from ???????, plainto_tsquery('THE QUERY') AS q
-	where (text_vals @@ q)
-	)
-	AS Results ORDER BY ts_rank_cd(Results.text_vals, plainto_tsquery('THE QUERY')) DESC LIMIT 10;
+
 				
