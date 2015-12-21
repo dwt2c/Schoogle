@@ -25,7 +25,12 @@ class O_Pipeline(object):
       upsert.searchable_Insert(self.cursor,item)
       #print item['full_text']
       self.connection.commit()
-    except:
+      print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      print "MADE IT"
+    except Exception as e:
+      print e
+      print "______________________________________________________________"
+      print "Insert exception thrown"
       self.connection.rollback()
     #self.connection.commit()
     #upsert.fullpage_Insert(self.cursor,item)

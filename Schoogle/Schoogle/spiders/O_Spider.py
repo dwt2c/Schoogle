@@ -4,14 +4,12 @@ from scrapy.spiders import Spider
 from scrapy.selector import Selector
 from scrapy import Request
 import sys
-#sys.path.append("/Users/danielthornton/Desktop/schoogle/schoogle")
-#from items import O_Item
-#from schoogle.schoogle.items import O_Item
 from Schoogle.items import O_Item
 from sys import getsizeof
 from datetime import datetime
 import time
 import re
+mport string
 
 def reduce(text):
 	return "".join([c for c in text if c in string.letters or c in (" ",)])
@@ -45,7 +43,8 @@ class O_Spider(Spider):
 	def parse(self,response):
 		# here we use scrapy's request object to catch all invalid links when parsing our documnet
 		try:
-			for link in response.xpath('//@href').extract():
+			links = response.xpath('//@href').extract()
+			for link in links:
 				try:
 					req = Request(link,callback = self.parse)
 				except ValueError:
@@ -62,9 +61,12 @@ class O_Spider(Spider):
 			current_item['full_html'] = response.body_as_unicode() # not sure if we really want this..
 			current_item['full_text'] = " ".join(prune(response.xpath('//text()').extract()))
 			current_item['secure'] = 'https' in str(response.request)
-			current_item['links'] = response.xpath('//@href').extract()
+			current_item['links'] = links
 			yield current_item
-		except:
+		except Exception as e:
+			print "______________________________________________________________"
+			print " ERROR THROW ON ITEM YIELD"
+			print e
 			pass
 
 
