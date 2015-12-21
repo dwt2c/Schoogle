@@ -5,8 +5,8 @@ def upsert(insert,update,item):
 
 
 def searchable_Insert(cursor,item):
-	cursor.execute("INSERT into searchable (title, URL, security, key_text)  values (%s,%s,%s,%s)", 
-		(item['title'],item['url'],item['secure'],item['full_text']))
+	cursor.execute("INSERT into searchable (pagerank,title, URL, security, full_text)  values (%s,%s,%s,%s,%s)", 
+		(1,item['title'],item['url'],item['secure'],item['full_text']))
 
 
 def searchable_Update(cursor,item):

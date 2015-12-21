@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for schoogle_spider project
+# Scrapy settings for schoogle project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,20 +9,15 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'O_spider'
+BOT_NAME = 'O_Spider'
 
-SPIDER_MODULES = ['schoogle_spider.spiders']
-NEWSPIDER_MODULE = 'schoogle_spider.spiders'
-DEFAULT_ITEM_CLASS = 'schoogle_spider.items.O_Item'
+SPIDER_MODULES = ['schoogle.spiders']
+NEWSPIDER_MODULE = 'schoogle.spiders'
+DEFAULT_ITEM_CLASS = 'schoogle.items.O_Item'
 
-
-# force spider to crawl dfs
-DEPTH_PRIORITY = 1
-SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'
-SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'schoogle_spider (+http://www.yourdomain.com)'
+#USER_AGENT = 'schoogle (+http://www.yourdomain.com)'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS=32
@@ -50,13 +45,13 @@ SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'schoogle_spider.middlewares.MyCustomSpiderMiddleware': 543,
+#    'schoogle.middlewares.MyCustomSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'schoogle_spider.middlewares.MyCustomDownloaderMiddleware': 543,
+#    'schoogle.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -67,9 +62,9 @@ SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'schoogle_spider.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'schoogle.pipelines.O_Pipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
